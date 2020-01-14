@@ -1,12 +1,55 @@
-button:hover {
+#carr_wrap button:hover {
 	cursor: pointer;
 }
-button:disabled {
+#carr_wrap button:disabled {
 	cursor: not-allowed;
+}
+#carr_wrap h3, #carr_wrap h4 {
+	text-align: center;
 }
 
 
 
+
+/*Temporary CSS*/
+
+#carr_wrap {
+	width: 900px;
+	margin: 30px auto;
+}
+#three_inputs_wrap {
+	display: flex;
+}
+#three_inputs_wrap div {
+	width: 300px;
+}
+
+/*Tuffnells table*/
+
+#carr_tuffnells_wrap {
+	margin-top: 20px;
+}
+#tuff_headlines {
+	display: flex;
+	border: 1px solid black;
+}
+#tuff_headlines > div {
+	width: 25%;
+}
+#tuff_headlines p {
+	padding-left: 2px;
+}
+
+#tuff_supp_headlines {
+	display: flex;
+	border: 1px solid black;
+}
+#tuff_supp_headlines > div {
+	width: 20%;
+}
+#tuff_supp_headlines p {
+	padding-left: 2px;
+}
 
 
 
