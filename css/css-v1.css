@@ -1,0 +1,18 @@
+button:hover {
+	cursor: pointer;
+}
+button:disabled {
+	cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+/*@media (max-width: 1800px) {*/
+@media (max-width: 1800px) {
+
+}
