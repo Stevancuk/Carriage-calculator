@@ -7,6 +7,9 @@
 #carr_wrap h3, #carr_wrap h4 {
 	text-align: center;
 }
+#carr_wrap input {
+	width: 60px;
+}
 
 
 
@@ -22,6 +25,16 @@
 }
 #three_inputs_wrap div {
 	width: 300px;
+}
+#postcode_wrap {
+	position: relative;
+}
+#post_error_info {
+	color: red;
+	display: none;
+	position: absolute;
+	top: 10px;
+	left: 0px;
 }
 
 /*Tuffnells table*/
@@ -51,7 +64,11 @@
 	padding-left: 2px;
 }
 
-
+#carr_calc {
+	display: block;
+	width: 150px;
+	margin: 40px auto;
+}
 
 
 
