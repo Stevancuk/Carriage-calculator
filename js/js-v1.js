@@ -8,7 +8,6 @@
 let tuffnellZones = {
 	"ANG" : ["LL58", "LL59", "LL60", "LL61", "LL62", "LL63", "LL64", "LL65", "LL66", "LL67", "LL68", "LL69", "LL70", "LL71", "LL72", "LL73", "LL74", "LL75", 
 			"LL76", "LL77", "LL78"],
-	],
 	"LON" : ["E1", "E10", "E11", "E12","E13", "E14", "E15","E16", "E17", "E18", "E1W", "E2","E3", "E4", "E5","E6", "E7", "E77", "E8","E9", "E98",
     		"EC1A", "EC1M", "EC1N", "EC1P", "EC1R", "EC1V", "EC1Y", "EC2A", "EC2M", "EC2N", "EC2P", "EC2R", "EC2V", "EC2Y", "EC3A", "EC3M", "EC3N", "EC3P", 
     		"EC3R", "EC3V", "EC4A", "EC4M", "EC4N", "EC4P", "EC4R", "EC4V", "EC4Y", "EC50", "EC88", "N1", "N10", "N11", "N12", "N13", "N14", "N15", "N16", "N17", 
@@ -185,6 +184,14 @@ function calcTuffnells() {
 		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['Less2.5'];
 		$('#tuff_pipe_length').text('Pipe less or equal to 2.5m');
 		$('#tuff_result3 span').text(tuffLengthCharge);
+	}else if(pipeLen < 6){
+		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['3to5'];
+		$('#tuff_pipe_length').text('Pipe between 3m and 6m');
+		$('#tuff_result3 span').text(tuffLengthCharge);
+	}else {
+		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['6m'];
+		$('#tuff_pipe_length').text('Pipe 6m');
+		$('#tuff_result3 span').text(tuffLengthCharge);
 	}
 
 	//Residential Supplement
@@ -260,3 +267,6 @@ $(function(){
 // Dynamic text for Tuffnell (pipe length)
 // How to determine if supplement is residential
 // Any 'shake' effect on wrong inputs
+// Postcode expects Capital letters atm.... if not drop-down.... should it accept not capital as well?
+// What happens with tuffnel if pipe is >6m
+// Need info text for several situations(long pipes, other invalid inputs)

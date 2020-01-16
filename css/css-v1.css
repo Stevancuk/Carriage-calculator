@@ -42,12 +42,22 @@
 #carr_tuffnells_wrap {
 	margin-top: 20px;
 }
+#carr_tuffnells_wrap p {
+	text-align: center;
+}
 #tuff_headlines {
 	display: flex;
 	border: 1px solid black;
 }
 #tuff_headlines > div {
-	width: 25%;
+	width: 30%;
+	border-right: 1px solid black;
+}
+#tuff_headlines #tuff_head1 {
+	width: 10%;
+}
+#tuff_headlines #tuff_head4 {
+	border: none;
 }
 #tuff_headlines p {
 	padding-left: 2px;
@@ -59,6 +69,16 @@
 }
 #tuff_supp_headlines > div {
 	width: 20%;
+	border-right: 1px solid black;
+}
+#tuff_supp_headlines #tuff_supp_head2 {
+	width: 25%;
+}
+#tuff_supp_headlines #tuff_supp_head3 {
+	width: 15%;
+}
+#tuff_supp_headlines #tuff_supp_head5 {
+	border: none;
 }
 #tuff_supp_headlines p {
 	padding-left: 2px;
