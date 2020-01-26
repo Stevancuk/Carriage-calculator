@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Carriage Calculator</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/css-v1.css">
+	<link rel="stylesheet" href="css/css-v2.css">
 </head>
 <body>
 	<div id="carr_wrap">
@@ -16,7 +16,7 @@
 
 					<div id="postcode_wrap">
 						<label for="carr_input_postcode"> Your Postcode: </label>
-						<input type="text" id="carr_input_postcode" value="LL58 3PZ ">
+						<input type="text" id="carr_input_postcode" value="">
 						<p id="post_error_info"><i class="fas fa-exclamation-circle"></i> Not a recognised UK postcode </p>
 					</div>
 
@@ -32,8 +32,8 @@
 					<div id="address_wrap">
 						<label for="carr_input_address"> Your Address: </label>
 						<select id="carr_input_address">
-							<option value="residential"> residential </option>
 							<option value="commercial"> commercial </option>
+							<option value="residential"> residential </option>
 						</select>
 					</div>
 
@@ -96,6 +96,6 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<script src="js/js-v1.js"></script>
+<script src="js/js-v2.js"></script>
 </body>
 </html>

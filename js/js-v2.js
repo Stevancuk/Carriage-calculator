@@ -4,42 +4,42 @@
 let tuffnellPrices;
 $.post('js/tuffnellPrices.json', 'json').done(function(response) {
 	tuffnellPrices = response;
-	console.log(tuffnellPrices);
+	// console.log(tuffnellPrices);
 });
 
 //Get Tufnell Zones from json file
 let tuffnellZones;
 $.post('js/tuffnellZones.json', 'json').done(function(response) {
 	tuffnellZones = response;
-	console.log(tuffnellZones);
+	// console.log(tuffnellZones);
 });
 
 //Get Tufnell Supplements from json file
 let tuffnellSupplements;
 $.post('js/tuffnellSupplements.json', 'json').done(function(response) {
 	tuffnellSupplements = response;
-	console.log(tuffnellSupplements);
+	// console.log(tuffnellSupplements);
 });
 
 //Get DHL Prices from json file
 let dhlPrices;
 $.post('js/dhlPrices.json', 'json').done(function(response) {
 	dhlPrices = response;
-	console.log(dhlPrices);
+	// console.log(dhlPrices);
 });
 
 //Get DHL Zones from json file
 let dhlZones;
 $.post('js/dhlZones.json', 'json').done(function(response) {
 	dhlZones = response;
-	console.log(dhlZones);
+	// console.log(dhlZones);
 });
 
 //Get DHL Supplements from json file
 let dhlSupplements;
 $.post('js/dhlSupplements.json', 'json').done(function(response) {
 	dhlSupplements = response;
-	console.log(dhlSupplements);
+	// console.log(dhlSupplements);
 });
 
 
@@ -68,7 +68,7 @@ function calcTuffnells() {
 	if( $('#carr_input_address').val() == 'residential' ){
 		tuffnelResidential = tuffnellPrices[tuffnellAreaName]['residential'];
 	}
-	console.log('Residential: ', tuffnelResidential);
+	// console.log('Residential: ', tuffnelResidential);
 
 	//Write results
 	let tuffSum = tuffAreaStandingCharge + tuffLengthCharge + tuffnelResidential;
@@ -137,14 +137,14 @@ function calcDHL() {
 }
 
 function mainCalc() {
-	console.log('Starting calculations');
+	// console.log('Starting calculations');
 	if(exactZoneMatch){
 		$( "#post_error_info" ).hide();
 		calcTuffnells();
 		calcDHL();
 		$( "#carr_outputs_wrap" ).show();
 	}else{
-		console.log('postode input error');
+		// console.log('postode input error');
 		//Red info that postcode is not a valid input
 		$( "#post_error_info" ).show();
 		$( "#carr_outputs_wrap" ).hide();
@@ -158,13 +158,13 @@ let tuffnellAreaName, dhlZoneName;
 function checkPostZone() {
 	$.each(tuffnellZones, function(tuffZoneName, trimedZones){
 		if($.inArray(postcode, trimedZones) !== -1) {
-			console.log(trimedZones);
+			// console.log(trimedZones);
 			exactZoneMatch = true;
 			tuffnellAreaName = tuffZoneName;
 			//find DHL Zone
 			$.each(dhlZones, function(dhlZoneNameIndex, trimedDHLZones){
 				if($.inArray(postcode, trimedDHLZones) !== -1) {
-					console.log(trimedDHLZones);
+					// console.log(trimedDHLZones);
 					dhlZoneName = dhlZoneNameIndex;
 					return false;
 				}else{
@@ -173,7 +173,7 @@ function checkPostZone() {
 			});
 			return false;
 		}else{
-			console.log('ne');
+			// console.log('ne');
 			exactZoneMatch = false;
 		}
 	})
