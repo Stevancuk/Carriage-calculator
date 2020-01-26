@@ -47,57 +47,94 @@ $.post('js/dhlSupplements.json', 'json').done(function(response) {
 // *** Tuffnells PRICES  ***
 // *************************
 
-let tuffAreaStandingCharge, tuffLengthCharge;
+let tuffAreaStandingCharge, tuffLengthCharge, tuffnelResidential;
 function calcTuffnells() {
-	//Fill in 'Area'
-	$('#tuff_result1').text(tuffnellAreaName);
 
 	//Area Standing Charge
 	tuffAreaStandingCharge = tuffnellPrices[tuffnellAreaName]['Area'];
-	$('#tuff_result2 span').text(tuffAreaStandingCharge);
 
-	//Fill in text for 'Pipe length' 
 	//If pipe is 2.5m or less there is no charge
-	if(pipeLen <= 2.5){
+	if(pipeLen == 'less1.25'){
 		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['Less2.5'];
-		$('#tuff_pipe_length').text('Pipe less or equal to 2.5m');
-		$('#tuff_result3 span').text(tuffLengthCharge);
-	}else if(pipeLen < 6){
+	}else if(pipeLen == '1.25to5'){
 		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['3to5'];
-		$('#tuff_pipe_length').text('Pipe between 3m and 6m');
-		$('#tuff_result3 span').text(tuffLengthCharge);
 	}else {
 		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['6m'];
-		$('#tuff_pipe_length').text('Pipe 6m');
-		$('#tuff_result3 span').text(tuffLengthCharge);
 	}
 
 	//Residential Supplement
-	//    !??!?!????????????????!?!?!?!?!?!!??
+	tuffnelResidential = 0;
+
+	if( $('#carr_input_address').val() == 'residential' ){
+		tuffnelResidential = tuffnellPrices[tuffnellAreaName]['residential'];
+	}
+	console.log('Residential: ', tuffnelResidential);
+
+	//Write results
+	let tuffSum = tuffAreaStandingCharge + tuffLengthCharge + tuffnelResidential;
+
+	//Remove disabled options
+	if ( tuffnellSupplements["NextWorkDay"]["visible"] ){
+		$('#result_tuff_nextDay').html(`£<span>${(tuffSum + tuffnellSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
+	}else{ $('#result_tuff_nextDay').text('N/A'); }
+
+	if ( tuffnellSupplements["2-3Day"]["visible"] ){
+		$('#result_tuff_2to3Days').html(`£<span>${(tuffSum + tuffnellSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
+	}else{ $('#result_tuff_2to3Days').text('N/A'); }
+
+	if ( tuffnellSupplements["AM"]["visible"] ){
+		$('#result_tuff_am').html(`£<span>${(tuffSum + tuffnellSupplements["AM"]["value"]).toFixed(2)} </span>`);
+	}else{ $('#result_tuff_am').text('N/A'); }
+
+	if ( tuffnellSupplements["pre10:30"]["visible"] ){
+		$('#result_tuff_pre1030').html(`£<span>${(tuffSum + tuffnellSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
+	}else{ $('#result_tuff_pre1030').text('N/A'); }
+
+	if ( tuffnellSupplements["Saturday"]["visible"] ){
+		$('#result_tuff_Saturday').html(`£<span>${(tuffSum + tuffnellSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
+	}else{ $('#result_tuff_Saturday').text('N/A'); }
 }
-let dhlAreaStandingCharge, dhlLengthCharge;
+let dhlAreaStandingCharge;
 // *******************
 // *** DHL PRICES  ***
 // *******************
 
 function calcDHL() {
-	//Fill in 'Zone'
-	$('#dhl_result1').text(dhlZoneName);
 
 	//Zone Standing Charge
 	dhlAreaStandingCharge = dhlPrices[dhlZoneName]['Zone'];
-	$('#dhl_result2 span').text(dhlAreaStandingCharge);
 
+
+	//Remove disabled options
+	//DHL must be less than 1.25m
+	if(pipeLen == 'less1.25') {
+		if ( dhlSupplements["NextWorkDay"]["visible"] ){
+			$('#result_DHL_nextDay').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_DHL_nextDay').text('N/A'); }
+
+		if ( dhlSupplements["2-3Day"]["visible"] ){
+			$('#result_DHL_2to3Days').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_DHL_2to3Days').text('N/A'); }
+
+		if ( dhlSupplements["AM"]["visible"] ){
+			$('#result_DHL_am').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["AM"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_DHL_am').text('N/A'); }
+
+		if ( dhlSupplements["pre10:30"]["visible"] ){
+			$('#result_DHL_pre1030').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_DHL_pre1030').text('N/A'); }
+
+		if ( dhlSupplements["Saturday"]["visible"] ){
+			$('#result_DHL_Saturday').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_DHL_Saturday').text('N/A'); }		
+	}else{
+		$('#result_DHL_nextDay').text('Pipe must be cut to 1.25m');
+		$('#result_DHL_2to3Days').text('Pipe must be cut to 1.25m');
+		$('#result_DHL_am').text('Pipe must be cut to 1.25m');
+		$('#result_DHL_pre1030').text('Pipe must be cut to 1.25m');
+		$('#result_DHL_Saturday').text('Pipe must be cut to 1.25m');
+	}
 }
-
-
-
-
-
-
-
-
-
 
 function mainCalc() {
 	console.log('Starting calculations');
@@ -105,10 +142,12 @@ function mainCalc() {
 		$( "#post_error_info" ).hide();
 		calcTuffnells();
 		calcDHL();
+		$( "#carr_outputs_wrap" ).show();
 	}else{
 		console.log('postode input error');
 		//Red info that postcode is not a valid input
 		$( "#post_error_info" ).show();
+		$( "#carr_outputs_wrap" ).hide();
 	}
 }
 
@@ -148,13 +187,10 @@ function getInputs() {
 	postcode = $.trim( $('#carr_input_postcode').val() );
 	postcode = postcode.slice(0,-3);
 	postcode = $.trim( postcode );
+	postcode = postcode.toUpperCase();
 
-	pipeLen = parseFloat( $('#carr_input_pipe').val() );
+	pipeLen = $('#carr_input_pipe').val();
 	address = $('#carr_input_address').val();
-
-	console.log(postcode);
-	// console.log(pipeLen);
-	// console.log(address);
 	checkPostZone();
 }
 
@@ -172,11 +208,3 @@ $(function(){
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NOTES - QUESTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-// * Do you want length input to be a drop-down select (<1.25m, 1.25m-5m, 5m-6m ....)
-// Do you want postcodes to be a drop-down dynamically made from json that your staff can edit
-// Dynamic text for Tuffnell (pipe length)
-// How to determine if supplement is residential
-// Any 'shake' effect on wrong inputs
-// Postcode expects Capital letters atm.... if not drop-down.... should it accept not capital as well?
-// What happens with tuffnel if pipe is >6m
-// Need info text for several situations(long pipes, other invalid inputs)
