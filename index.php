@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Carriage Calculator</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/css-v2.css">
+	<link rel="stylesheet" href="css/css-v3.css">
 </head>
 <body>
 	<div id="carr_wrap">
@@ -56,31 +56,46 @@
 				<div class="carrTableRows">
 					<div> <p> Next working day </p> </div>
 					<div> <p id="result_tuff_nextDay"> £<span>00.00</span> </p> </div>
-					<div> <p id="result_DHL_nextDay"> £<span>00.00</span> </p> </div>
+					<div> 
+						<p id="result_DHL_nextDay"> £<span>00.00</span> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to 1.25m </p>
+					</div>
 				</div>
 
 				<div class="carrTableRows">
 					<div> <p> 2-3 working day </p> </div>
 					<div> <p id="result_tuff_2to3Days"> £<span>00.00</span> </p> </div>
-					<div> <p id="result_DHL_2to3Days"> £<span>00.00</span> </p> </div>
+					<div> 
+						<p id="result_DHL_2to3Days"> £<span>00.00</span> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to 1.25m </p>
+					</div>
 				</div>
 
 				<div class="carrTableRows">
 					<div> <p> AM </p> </div>
 					<div> <p id="result_tuff_am"> £<span>00.00</span> </p> </div>
-					<div> <p id="result_DHL_am"> £<span>00.00</span> </p> </div>
+					<div> 
+						<p id="result_DHL_am"> £<span>00.00</span> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to 1.25m </p>
+					</div>
 				</div>
 
 				<div class="carrTableRows">
 					<div> <p> Pre 10:30am </p> </div>
 					<div> <p id="result_tuff_pre1030"> £<span>00.00</span> </p> </div>
-					<div> <p id="result_DHL_pre1030"> £<span>00.00</span> </p> </div>
+					<div> 
+						<p id="result_DHL_pre1030"> £<span>00.00</span> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to 1.25m </p>
+					</div>
 				</div>
 
 				<div class="carrTableRows">
 					<div> <p> Saturday </p> </div>
 					<div> <p id="result_tuff_Saturday"> £<span>00.00</span> </p> </div>
-					<div> <p id="result_DHL_Saturday"> £<span>00.00</span> </p> </div>
+					<div> 
+						<p id="result_DHL_Saturday"> £<span>00.00</span> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to 1.25m </p>
+					</div>
 				</div>
 
 
@@ -96,6 +111,6 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<script src="js/js-v2.js"></script>
+<script src="js/js-v3.js"></script>
 </body>
 </html>
