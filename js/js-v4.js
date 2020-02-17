@@ -50,50 +50,57 @@ $.post('js/dhlSupplements.json', 'json').done(function(response) {
 let tuffAreaStandingCharge, tuffLengthCharge, tuffnelResidential;
 function calcTuffnells() {
 
-	//Area Standing Charge
-	tuffAreaStandingCharge = tuffnellPrices[tuffnellAreaName]['Area'];
-
-	//If pipe is 2.5m or less there is no charge
 	if(pipeLen == 'less1.25'){
-		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['Less2.5'];
-	}else if(pipeLen == '1.25to5'){
-		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['3to5'];
-	}else {
-		tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['6m'];
-	}
+		$('.tuffResults').hide();
+	}else{
+		//Area Standing Charge
+		tuffAreaStandingCharge = tuffnellPrices[tuffnellAreaName]['Area'];
 
-	//Residential Supplement
-	tuffnelResidential = 0;
+		//If pipe is 2.5m or less there is no charge
+		if(pipeLen == 'less1.25'){
+			tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['Less2.5'];
+		}else if(pipeLen == '1.25to5'){
+			tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['3to5'];
+		}else {
+			tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['6m'];
+		}
 
-	if( $('#carr_input_address').val() == 'residential' ){
-		tuffnelResidential = tuffnellPrices[tuffnellAreaName]['residential'];
-	}
-	// console.log('Residential: ', tuffnelResidential);
+		//Residential Supplement
+		tuffnelResidential = 0;
 
-	//Write results
-	let tuffSum = tuffAreaStandingCharge + tuffLengthCharge + tuffnelResidential;
+		if( $('#carr_input_address').val() == 'residential' ){
+			tuffnelResidential = tuffnellPrices[tuffnellAreaName]['residential'];
+		}
+		// console.log('Residential: ', tuffnelResidential);
 
-	//Remove disabled options
-	if ( tuffnellSupplements["NextWorkDay"]["visible"] ){
-		$('#result_tuff_nextDay').html(`£<span>${(tuffSum + tuffnellSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_nextDay').text('N/A'); }
+		//Write results
+		let tuffSum = tuffAreaStandingCharge + tuffLengthCharge + tuffnelResidential;
 
-	if ( tuffnellSupplements["2-3Day"]["visible"] ){
-		$('#result_tuff_2to3Days').html(`£<span>${(tuffSum + tuffnellSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_2to3Days').text('N/A'); }
+		//Remove disabled options
+		if ( tuffnellSupplements["NextWorkDay"]["visible"] ){
+			$('#result_tuff_nextDay').html(`£<span>${(tuffSum + tuffnellSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_tuff_nextDay').text('N/A'); }
 
-	if ( tuffnellSupplements["AM"]["visible"] ){
-		$('#result_tuff_am').html(`£<span>${(tuffSum + tuffnellSupplements["AM"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_am').text('N/A'); }
+		if ( tuffnellSupplements["2-3Day"]["visible"] ){
+			$('#result_tuff_2to3Days').html(`£<span>${(tuffSum + tuffnellSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_tuff_2to3Days').text('N/A'); }
 
-	if ( tuffnellSupplements["pre10:30"]["visible"] ){
-		$('#result_tuff_pre1030').html(`£<span>${(tuffSum + tuffnellSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_pre1030').text('N/A'); }
+		if ( tuffnellSupplements["AM"]["visible"] ){
+			$('#result_tuff_am').html(`£<span>${(tuffSum + tuffnellSupplements["AM"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_tuff_am').text('N/A'); }
 
-	if ( tuffnellSupplements["Saturday"]["visible"] ){
-		$('#result_tuff_Saturday').html(`£<span>${(tuffSum + tuffnellSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_Saturday').text('N/A'); }
+		if ( tuffnellSupplements["pre10:30"]["visible"] ){
+			$('#result_tuff_pre1030').html(`£<span>${(tuffSum + tuffnellSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_tuff_pre1030').text('N/A'); }
+
+		if ( tuffnellSupplements["Saturday"]["visible"] ){
+			$('#result_tuff_Saturday').html(`£<span>${(tuffSum + tuffnellSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
+		}else{ $('#result_tuff_Saturday').text('N/A'); }
+
+		$('.tuffResults').show();
+	}	
 }
+
 let dhlAreaStandingCharge;
 // *******************
 // *** DHL PRICES  ***
@@ -109,9 +116,16 @@ function calcDHL() {
 	//DHL must be less than 1.25m
 	if(pipeLen == 'less1.25') {
 		$('.dhlCutTo125').hide();
-	}else{
+	}
+	if(pipeLen == '1.25to5') {
+		$('.dhlCutTo125').text('Pipe must be cut to 1.25m');
 		$('.dhlCutTo125').show();
 	}
+	if(pipeLen == '6m') {
+		$('.dhlCutTo125').text('Pipe must be cut to <1.25m');
+		$('.dhlCutTo125').show();
+	}
+	
 
 	if ( dhlSupplements["NextWorkDay"]["visible"] ){
 		$('#result_DHL_nextDay').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
