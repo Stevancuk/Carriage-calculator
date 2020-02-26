@@ -16,8 +16,6 @@
 #carr_outputs_wrap {
 	display: none;
 }
-
-
 #carr_wrap {
 	width: 750px;
 	margin: 30px auto;
@@ -95,6 +93,7 @@
 	padding-left: 10px;
 	color: #676767;
 	margin: 10px 0px;
+	font-size: 16px;
 }
 #carr_table_wrap .carrTableRows {
 	display: flex;
@@ -124,8 +123,6 @@
 	color: white;	
 }
 
-
-
 #carr_calc {
 	display: block;
 	width: 150px;
@@ -140,9 +137,43 @@
 	border-radius: 3px;
 }
 
-
-
-/*@media (max-width: 1800px) {*/
-@media (max-width: 1800px) {
-
+@media (max-width: 770px){
+	#three_inputs_wrap {
+		display: block;
+		width: 300px;
+		margin: 0 auto;
+	}
+	#postcode_wrap, #pipe_wrap, #address_wrap {
+		margin: 0 auto;
+	}
+	#carr_wrap {
+		width: 420px;
+	}
+	#carr_table_wrap {
+		width: 400px;
+	}
+	#carr_table_wrap p {
+		padding-left: 2px;
+		margin: 4px 0px;
+	}
+	#carr_outputs_wrap .dhlCutTo125 {
+		font-size: 11px;
+	}
+	#carr_table_headline p {
+		text-align: center;
+	}
+	#three_inputs_wrap > div {
+		margin-bottom: 20px;
+	}
+}
+@media (max-width: 440px){
+	#carr_wrap {
+		width: 360px;
+	}
+	#carr_table_wrap {
+		width: 340px;
+	}
+	#carr_table_wrap p {
+		font-size: 14px;
+	}
 }
