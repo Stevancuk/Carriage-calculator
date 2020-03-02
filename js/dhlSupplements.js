@@ -1,4 +1,4 @@
-{
+let dhlSupplements = {
 	"2-3Day" : {
 		"value":       -1.5,
 		"visible":     true
@@ -8,15 +8,15 @@
 		"visible":     true
 	}, 
 	"AM" : {
-		"value":       6.13,
+		"value":       4.16,
 		"visible":     true
 	}, 
 	"pre10:30" : {
-		"value":       23.37,
+		"value":       8.29,
 		"visible":     true
 	}, 
 	"Saturday" : {
-		"value":       24.48,
+		"value":       10.37,
 		"visible":     true
 	}
 }

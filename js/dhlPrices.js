@@ -1,4 +1,4 @@
-{
+let dhlPrices = {
 	"A" : {
 		"Zone" :     4.99,
 		"Less1.5" :  0,

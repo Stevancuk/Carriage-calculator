@@ -1,46 +1,46 @@
 "use strict";
 
-//Get Tufnell Prices from json file
-let tuffnellPrices;
-$.post('js/tuffnellPrices.json', 'json').done(function(response) {
-	tuffnellPrices = response;
-	// console.log(tuffnellPrices);
-});
+// //Get Tufnell Prices from json file
+// let tuffnellPrices;
+// $.post('js/tuffnellPrices.json', 'json').done(function(response) {
+// 	tuffnellPrices = response;
+// 	// console.log(tuffnellPrices);
+// });
 
-//Get Tufnell Zones from json file
-let tuffnellZones;
-$.post('js/tuffnellZones.json', 'json').done(function(response) {
-	tuffnellZones = response;
-	// console.log(tuffnellZones);
-});
+// //Get Tufnell Zones from json file
+// let tuffnellZones;
+// $.post('js/tuffnellZones.json', 'json').done(function(response) {
+// 	tuffnellZones = response;
+// 	// console.log(tuffnellZones);
+// });
 
-//Get Tufnell Supplements from json file
-let tuffnellSupplements;
-$.post('js/tuffnellSupplements.json', 'json').done(function(response) {
-	tuffnellSupplements = response;
-	// console.log(tuffnellSupplements);
-});
+// //Get Tufnell Supplements from json file
+// let tuffnellSupplements;
+// $.post('js/tuffnellSupplements.json', 'json').done(function(response) {
+// 	tuffnellSupplements = response;
+// 	// console.log(tuffnellSupplements);
+// });
 
-//Get DHL Prices from json file
-let dhlPrices;
-$.post('js/dhlPrices.json', 'json').done(function(response) {
-	dhlPrices = response;
-	// console.log(dhlPrices);
-});
+// //Get DHL Prices from json file
+// let dhlPrices;
+// $.post('js/dhlPrices.json', 'json').done(function(response) {
+// 	dhlPrices = response;
+// 	// console.log(dhlPrices);
+// });
 
-//Get DHL Zones from json file
-let dhlZones;
-$.post('js/dhlZones.json', 'json').done(function(response) {
-	dhlZones = response;
-	// console.log(dhlZones);
-});
+// //Get DHL Zones from json file
+// let dhlZones;
+// $.post('js/dhlZones.json', 'json').done(function(response) {
+// 	dhlZones = response;
+// 	// console.log(dhlZones);
+// });
 
-//Get DHL Supplements from json file
-let dhlSupplements;
-$.post('js/dhlSupplements.json', 'json').done(function(response) {
-	dhlSupplements = response;
-	// console.log(dhlSupplements);
-});
+// //Get DHL Supplements from json file
+// let dhlSupplements;
+// $.post('js/dhlSupplements.json', 'json').done(function(response) {
+// 	dhlSupplements = response;
+// 	// console.log(dhlSupplements);
+// });
 
 
 // *************************

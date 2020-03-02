@@ -1,4 +1,4 @@
-{
+let tuffnellSupplements = {
 	"2-3Day" : {
 		"value":       -1.5,
 		"visible":     true
@@ -8,15 +8,15 @@
 		"visible":     true
 	}, 
 	"AM" : {
-		"value":       4.16,
+		"value":       6.13,
 		"visible":     true
 	}, 
 	"pre10:30" : {
-		"value":       8.29,
+		"value":       23.37,
 		"visible":     true
 	}, 
 	"Saturday" : {
-		"value":       10.37,
+		"value":       24.48,
 		"visible":     true
 	}
 }

@@ -1,4 +1,4 @@
-{
+let tuffnellZones = {
 	"ANG" : ["LL58", "LL59", "LL60", "LL61", "LL62", "LL63", "LL64", "LL65", "LL66", "LL67", "LL68", "LL69", "LL70", "LL71", "LL72", "LL73", "LL74", "LL75", 
 			"LL76", "LL77", "LL78"],
 	"CHI" : ["GY1", "GY2", "GY3", "GY4", "GY5", "GY6", "GY7", "GY8", "GY9", "JE1", "JE2", "JE3", "JE4", "JE5"],

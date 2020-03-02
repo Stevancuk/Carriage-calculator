@@ -1,4 +1,4 @@
-{
+let tuffnellPrices = {
 	"UKM" : {
 		"Area" :     6.02,
 		"Less2.5" :  0,

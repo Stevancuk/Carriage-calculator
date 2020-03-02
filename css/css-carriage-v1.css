@@ -177,3 +177,11 @@
 		font-size: 14px;
 	}
 }
+@media (max-width: 380px){
+	#carr_wrap {
+		width: 320px;
+	}
+	#carr_table_wrap {
+		width: 300px;
+	}
+}
