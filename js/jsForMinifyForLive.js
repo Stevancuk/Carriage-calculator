@@ -170,13 +170,13 @@ let tuffnellAreaName, dhlZoneName;
 function checkPostZone() {
 	$.each(tuffnellZones, function(tuffZoneName, trimedZones){
 		if($.inArray(postcode, trimedZones) !== -1) {
-			console.log(trimedZones);
+			// console.log(trimedZones);
 			exactZoneMatch = true;
 			tuffnellAreaName = tuffZoneName;
 			//find DHL Zone
 			$.each(dhlZones, function(dhlZoneNameIndex, trimedDHLZones){
 				if($.inArray(postcode, trimedDHLZones) !== -1) {
-					console.log(trimedDHLZones);
+					// console.log(trimedDHLZones);
 					dhlZoneName = dhlZoneNameIndex;
 					return false;
 				}else{
