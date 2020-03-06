@@ -1,47 +1,8 @@
 "use strict";
 
-// //Get Tufnell Prices from json file
-// let tuffnellPrices;
-// $.post('https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/tuffnellPrices.json', 'json').done(function(response) {
-// 	tuffnellPrices = response;
-// 	// console.log(tuffnellPrices);
-// });
-
-// //Get Tufnell Zones from json file
-// let tuffnellZones;
-// $.post('https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/tuffnellZones.json', 'json').done(function(response) {
-// 	tuffnellZones = response;
-// 	// console.log(tuffnellZones);
-// });
-
-// //Get Tufnell Supplements from json file
-// let tuffnellSupplements;
-// $.post('https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/tuffnellSupplements.json', 'json').done(function(response) {
-// 	tuffnellSupplements = response;
-// 	// console.log(tuffnellSupplements);
-// });
-
-// //Get DHL Prices from json file
-// let dhlPrices;
-// $.post('https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/dhlPrices.json', 'json').done(function(response) {
-// 	dhlPrices = response;
-// 	// console.log(dhlPrices);
-// });
-
-// //Get DHL Zones from json file
-// let dhlZones;
-// $.post('https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/dhlZones.json', 'json').done(function(response) {
-// 	dhlZones = response;
-// 	// console.log(dhlZones);
-// });
-
-// //Get DHL Supplements from json file
-// let dhlSupplements;
-// $.post('https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/dhlSupplements.json', 'json').done(function(response) {
-// 	dhlSupplements = response;
-// 	// console.log(dhlSupplements);
-// });
-
+//Addition
+//Zones that only have 2-3 day delievery
+let tuffZonesOnly2_3DaysOption = ["NRI", "IOM", "SLY", "CHI", "SCI"];
 
 // *************************
 // *** Tuffnells PRICES  ***
@@ -77,7 +38,8 @@ function calcTuffnells() {
 		let tuffSum = tuffAreaStandingCharge + tuffLengthCharge + tuffnelResidential;
 
 		//Remove disabled options
-		if ( tuffnellSupplements["NextWorkDay"]["visible"] ){
+		//One more condition added - If zone is in array  tuffnellAreaName  -> show only 2-3day option
+		if ( tuffnellSupplements["NextWorkDay"]["visible"] && !tuffZonesOnly2_3DaysOption.includes(tuffnellAreaName) ){
 			$('#result_tuff_nextDay').html(`£<span>${(tuffSum + tuffnellSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
 		}else{ $('#result_tuff_nextDay').text('N/A'); }
 
@@ -85,15 +47,15 @@ function calcTuffnells() {
 			$('#result_tuff_2to3Days').html(`£<span>${(tuffSum + tuffnellSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
 		}else{ $('#result_tuff_2to3Days').text('N/A'); }
 
-		if ( tuffnellSupplements["AM"]["visible"] ){
+		if ( tuffnellSupplements["AM"]["visible"] && !tuffZonesOnly2_3DaysOption.includes(tuffnellAreaName) ){
 			$('#result_tuff_am').html(`£<span>${(tuffSum + tuffnellSupplements["AM"]["value"]).toFixed(2)} </span>`);
 		}else{ $('#result_tuff_am').text('N/A'); }
 
-		if ( tuffnellSupplements["pre10:30"]["visible"] ){
+		if ( tuffnellSupplements["pre10:30"]["visible"] && !tuffZonesOnly2_3DaysOption.includes(tuffnellAreaName) ){
 			$('#result_tuff_pre1030').html(`£<span>${(tuffSum + tuffnellSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
 		}else{ $('#result_tuff_pre1030').text('N/A'); }
 
-		if ( tuffnellSupplements["Saturday"]["visible"] ){
+		if ( tuffnellSupplements["Saturday"]["visible"] && !tuffZonesOnly2_3DaysOption.includes(tuffnellAreaName) ){
 			$('#result_tuff_Saturday').html(`£<span>${(tuffSum + tuffnellSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
 		}else{ $('#result_tuff_Saturday').text('N/A'); }
 
@@ -105,6 +67,10 @@ let dhlAreaStandingCharge;
 // *******************
 // *** DHL PRICES  ***
 // *******************
+
+//Addition
+//Zones that only have 2-3 day delievery
+let dhlZonesOnly2_3DaysOption = ["C", "D"];
 
 function calcDHL() {
 
@@ -126,8 +92,8 @@ function calcDHL() {
 		$('.dhlCutTo125').show();
 	}
 	
-
-	if ( dhlSupplements["NextWorkDay"]["visible"] ){
+	//One more condition added - If zone is in array  dhlZonesOnly2_3DaysOption  -> show only 2-3day option
+	if ( dhlSupplements["NextWorkDay"]["visible"] && !dhlZonesOnly2_3DaysOption.includes(dhlZoneName) ){
 		$('#result_DHL_nextDay').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
 	}else{ $('#result_DHL_nextDay').text('N/A'); }
 
@@ -135,15 +101,15 @@ function calcDHL() {
 		$('#result_DHL_2to3Days').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
 	}else{ $('#result_DHL_2to3Days').text('N/A'); }
 
-	if ( dhlSupplements["AM"]["visible"] ){
+	if ( dhlSupplements["AM"]["visible"] && !dhlZonesOnly2_3DaysOption.includes(dhlZoneName) ){
 		$('#result_DHL_am').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["AM"]["value"]).toFixed(2)} </span>`);
 	}else{ $('#result_DHL_am').text('N/A'); }
 
-	if ( dhlSupplements["pre10:30"]["visible"] ){
+	if ( dhlSupplements["pre10:30"]["visible"] && !dhlZonesOnly2_3DaysOption.includes(dhlZoneName) ){
 		$('#result_DHL_pre1030').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
 	}else{ $('#result_DHL_pre1030').text('N/A'); }
 
-	if ( dhlSupplements["Saturday"]["visible"] ){
+	if ( dhlSupplements["Saturday"]["visible"] && !dhlZonesOnly2_3DaysOption.includes(dhlZoneName) ){
 		$('#result_DHL_Saturday').html(`£<span>${(dhlAreaStandingCharge + dhlSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
 	}else{ $('#result_DHL_Saturday').text('N/A'); }		
 }
@@ -185,7 +151,7 @@ function checkPostZone() {
 			});
 			return false;
 		}else{
-			// console.log('ne');
+			// console.log('no');
 			exactZoneMatch = false;
 		}
 	})
