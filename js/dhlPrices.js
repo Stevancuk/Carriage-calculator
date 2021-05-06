@@ -1,27 +1,22 @@
 let dhlPrices = {
-	"A" : {
+	"UKM" : {
 		"Zone" :     4.99,
 		"Less1.5" :  0,
 		"longer":    "Pipe must be cut to 1.25m"  
 	},
-	"B" : {
+	"HI" : {
 		"Zone" :     4.99,
 		"Less1.5" :  0,
 		"longer":    "Pipe must be cut to 1.25m"  
 	},
-	"C" : {
-		"Zone" :     12.47,
+	"IS" : {
+		"Zone" :     22.99,
 		"Less1.5" :  0,
 		"longer":    "Pipe must be cut to 1.25m"  
 	},
-	"D" : {
-		"Zone" :     18.70,
+	"NI" : {
+		"Zone" :     0,
 		"Less1.5" :  0,
-		"longer":    "Pipe must be cut to 1.25m"  
-	},
-	"E" : {
-		"Zone" :     18.70,
-		"Less1.5" :  0,
-		"longer":    "Pipe must be cut to 1.25m"  
+		"longer":    "Please contact us for orders to Northern Ireland"  
 	}
 }
