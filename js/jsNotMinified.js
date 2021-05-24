@@ -104,7 +104,7 @@ function calcDHL() {
 }
 
 function mainCalc() {
-	console.log('Starting calculations');
+	// console.log('Starting calculations');
 	if(exactZoneMatch){
 		$( "#post_error_info" ).hide();
 		if (tuffnellAreaName == "NI"){
@@ -142,7 +142,7 @@ function checkPostZone() {
 					dhlZoneName = false;
 				}
 			});
-			console.log(tuffnellAreaName, dhlZoneName);
+			// console.log(tuffnellAreaName, dhlZoneName);
 			return false;
 		}else{
 			// console.log('no');
@@ -176,14 +176,14 @@ $('#carr_calc').on("click", function(e){
 
 //Calculate on input/select change only if calculate button was pressed at least once
 $('#carr_input_postcode, #carr_input_pipe, #carr_input_address').on("change", function () {
-	// if(calcButtonClicked){
+	if(calcButtonClicked){
 		getInputs();		
-	// }
+	}
 })
 
 
 $(function(){
-	getInputs();
+	// getInputs();
 })
 
 
