@@ -14,7 +14,7 @@
 	cursor: pointer;
 }
 #carr_outputs_wrap {
-	display: none;
+	/*display: none;*/
 }
 #carr_wrap {
 	width: 750px;
