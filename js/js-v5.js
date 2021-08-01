@@ -1,162 +1,286 @@
 "use strict";
 
-// *************************
-// *** Tuffnells PRICES  ***
-// *************************
 
-let tuffAreaStandingCharge, tuffnelResidential;
-let tuffLengthCharge = 0;
-function calcTuffnells() {
-
-	//Area Standing Charge
-	tuffAreaStandingCharge = tuffnellPrices[tuffnellAreaName]['Area'];
-
-	// //If pipe is 2.5m or less there is no charge
-	// if(pipeLen == 'less1.25'){
-	// 	tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['Less2.5'];
-	// }else if(pipeLen == '1.25to5'){
-	// 	tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['3to5'];
-	// }else {
-	// 	tuffLengthCharge = tuffnellPrices[tuffnellAreaName]['6m'];
-	// }
-
-	//Residential Supplement
-	tuffnelResidential = 0;
-
-	if( $('#carr_input_address').val() == 'residential' ){
-		tuffnelResidential = tuffnellPrices[tuffnellAreaName]['residential'];
-	}
-	// console.log('Residential: ', tuffnelResidential);
-
-	//Write results
-	let tuffSum = tuffAreaStandingCharge + tuffLengthCharge + tuffnelResidential;
-
-	//Remove disabled options
-	if ( tuffnellSupplements["NextWorkDay"]["visible"] && tuffnellAreaName == "UKM" ){
-		$('#result_tuff_nextDay').html(`£<span>${(tuffSum + tuffnellSupplements["NextWorkDay"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_nextDay').text('N/A'); }
-
-	if ( tuffnellSupplements["2-3Day"]["visible"] && tuffnellAreaName != "NI" ){
-		$('#result_tuff_2to3Days').html(`£<span>${(tuffSum + tuffnellSupplements["2-3Day"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_2to3Days').text('N/A'); }
-
-	if ( tuffnellSupplements["AM"]["visible"] && tuffnellAreaName == "UKM" ){
-		$('#result_tuff_am').html(`£<span>${(tuffSum + tuffnellSupplements["AM"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_am').text('N/A'); }
-
-	// if ( tuffnellSupplements["pre10:30"]["visible"] && !tuffZonesOnly2_3DaysOption.includes(tuffnellAreaName) ){
-	// 	$('#result_tuff_pre1030').html(`£<span>${(tuffSum + tuffnellSupplements["pre10:30"]["value"]).toFixed(2)} </span>`);
-	// }else{ $('#result_tuff_pre1030').text('N/A'); }
-
-	if ( tuffnellSupplements["Saturday"]["visible"] && tuffnellAreaName == "UKM" ){
-		$('#result_tuff_Saturday').html(`£<span>${(tuffSum + tuffnellSupplements["Saturday"]["value"]).toFixed(2)} </span>`);
-	}else{ $('#result_tuff_Saturday').text('N/A'); }
-
-	$('.tuffResults').show();
-
-}
-
-let dhlAreaStandingCharge;
 // *******************
 // *** DHL PRICES  ***
 // *******************
 
+let dhlAreaStandingCharge;
 function calcDHL() {
-
-	//check if DHL3-5 contains this postcode
-	if (dhlZones['DHL3-5'].includes(postcode)) {
-		console.log('DHL3-5 contains: ', postcode);
-		$('#result_DHL_3to5Days').text(`£${dhlPrices["DHL3-5"]["Zone"] + dhlSupplements["DHL3-5"]["value"]}`);
-	} else {
-		$('#result_DHL_3to5Days').text("N/A");
-		console.log('DHL3-5 does NOT contain: ', postcode);
-	}
-
-	//check if DHL2-3 contains this postcode
-	if (dhlZones['DHL2-3'].includes(postcode)) {
-		$('#result_DHL_2to3Days').text(`£${dhlPrices["DHL2-3"]["Zone"] + dhlSupplements["DHL2-3"]["value"]}`);
-		console.log('DHL2-3 contains: ', postcode);
-	} else {
-		console.log('DHL2-3 does NOT contain: ', postcode);
-	}
-
-	//check if DHLND contains this postcode
-	if (dhlZones['DHLND'].includes(postcode)) {
-		$('#result_DHL_next_day').text(`£${dhlPrices["DHLND"]["Zone"] + dhlSupplements["DHLND"]["value"]}`);
-		console.log('DHLND contains: ', postcode);
-	} else {
-		console.log('DHLND does NOT contain: ', postcode);
-	}
-
-	//check if DHLAMND contains this postcode
-	if (dhlZones['DHLAMND'].includes(postcode)) {
-		$('#result_DHL_next_day_am').text(`£${dhlPrices["DHLAMND"]["Zone"] + dhlSupplements["DHLAMND"]["value"]}`);
-		console.log('DHLAMND contains: ', postcode);
-	} else {
-		console.log('DHLAMND does NOT contain: ', postcode);
-	}
-
 
 	//DHL must be less than 1.25m
 	if(pipeLen == 'less1.25') {
 		$('.dhlCutTo125').hide();
 	}
-	if(pipeLen == '1.25to5') {
+	if(pipeLen == '2.5m') {
 		$('.dhlCutTo125').show();
 	}
 	if(pipeLen == '6m') {
 		$('.dhlCutTo125').show();
 	}	
+
+	//check if DHL3-5 contains this postcode
+	if (dhlZones['DHL3-5'].includes(postcode)) {
+		console.log('DHL3-5 contains: ', postcode);
+		let dhl35 = dhlPrices["DHL3-5"]["Zone"] + dhlSupplements["DHL3-5"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dhl35 += dhlPrices["DHL3-5"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dhl35 += dhlPrices["DHL3-5"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dhl35 += dhlPrices["DHL3-5"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dhl35 += dhlPrices["DHL3-5"]["residential"];
+		}
+		if (address == 'commercial') {
+			dhl35 += dhlPrices["DHL3-5"]["commercial"];
+		}
+
+		$('#result_DHL_3to5Days').text(`£${dhl35}`);
+	} else {
+		$('#result_DHL_3to5Days').text("N/A");
+		$('#result_DHL_3to5Days').siblings('.dhlCutTo125').hide();
+		console.log('DHL3-5 does NOT contain: ', postcode);
+	}
+
+	//check if DHL2-3 contains this postcode
+	if (dhlZones['DHL2-3'].includes(postcode)) {
+		console.log('DHL2-3 contains: ', postcode);
+		let dhl23 = dhlPrices["DHL2-3"]["Zone"] + dhlSupplements["DHL2-3"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dhl23 += dhlPrices["DHL2-3"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dhl23 += dhlPrices["DHL2-3"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dhl23 += dhlPrices["DHL2-3"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dhl23 += dhlPrices["DHL2-3"]["residential"];
+		}
+		if (address == 'commercial') {
+			dhl23 += dhlPrices["DHL2-3"]["commercial"];
+		}
+
+		$('#result_DHL_2to3Days').text(`£${dhl23}`);
+	} else {
+		$('#result_DHL_2to3Days').text("N/A");
+		$('#result_DHL_2to3Days').siblings('.dhlCutTo125').hide();
+		console.log('DHL3-5 does NOT contain: ', postcode);
+	}
+
+	//check if DHLND contains this postcode
+	if (dhlZones['DHLND'].includes(postcode)) {
+		console.log('DHLND contains: ', postcode);
+		let dhlND = dhlPrices["DHLND"]["Zone"] + dhlSupplements["DHLND"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dhlND += dhlPrices["DHLND"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dhlND += dhlPrices["DHLND"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dhlND += dhlPrices["DHLND"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dhlND += dhlPrices["DHLND"]["residential"];
+		}
+		if (address == 'commercial') {
+			dhlND += dhlPrices["DHLND"]["commercial"];
+		}
+
+		$('#result_DHL_next_day').text(`£${dhlND}`);
+	} else {
+		$('#result_DHL_next_day').text("N/A");
+		$('#result_DHL_next_day').siblings('.dhlCutTo125').hide();
+		console.log('DHL3-5 does NOT contain: ', postcode);
+	}
+
+	//check if DHLAMND contains this postcode
+	if (dhlZones['DHLAMND'].includes(postcode)) {
+		console.log('DHLAMND contains: ', postcode);
+		let dhlAMND = dhlPrices["DHLAMND"]["Zone"] + dhlSupplements["DHLAMND"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dhlAMND += dhlPrices["DHLAMND"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dhlAMND += dhlPrices["DHLAMND"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dhlAMND += dhlPrices["DHLAMND"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dhlAMND += dhlPrices["DHLAMND"]["residential"];
+		}
+		if (address == 'commercial') {
+			dhlAMND += dhlPrices["DHLAMND"]["commercial"];
+		}
+
+		$('#result_DHL_next_day_am').text(`£${dhlAMND}`);
+	} else {
+		$('#result_DHL_next_day_am').text("N/A");
+		$('#result_DHL_next_day_am').siblings('.dhlCutTo125').hide();
+		console.log('DHL3-5 does NOT contain: ', postcode);
+	}
+
 }
 
-// function mainCalc() {
-// 	// console.log('Starting calculations');
-// 	if(exactZoneMatch){
-// 		$( "#post_error_info" ).hide();
-// 		if (tuffnellAreaName == "NI"){
-// 			$('.tuffResults, #result_DHL_nextDay, #result_DHL_2to3Days, #result_DHL_am, #result_DHL_Saturday').text("Please contact us for orders to Northern Ireland");
-// 		}else{
-// 			calcTuffnells();
-// 			calcDHL();
-// 		}
-// 		$( "#carr_outputs_wrap" ).show();
-// 	}else{
-// 		// console.log('postode input error');
-// 		//Red info that postcode is not a valid input
-// 		$( "#post_error_info" ).show();
-// 		$( "#carr_outputs_wrap" ).hide();
-// 	}
-// }
+// ******************
+// *** DX PRICES  ***
+// ******************
+
+let tuffAreaStandingCharge, tuffnelResidential;
+let tuffLengthCharge = 0;
+function calcDX() {
+
+	//check if DX3-5 contains this postcode
+	if (dxZones['DX3-5'].includes(postcode)) {
+		console.log('DX3-5 contains: ', postcode);
+		let dx35 = dxPrices["DX3-5"]["Zone"] + dxSupplements["DX3-5"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dx35 += dxPrices["DX3-5"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dx35 += dxPrices["DX3-5"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dx35 += dxPrices["DX3-5"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dx35 += dxPrices["DX3-5"]["residential"];
+		}
+		if (address == 'commercial') {
+			dx35 += dxPrices["DX3-5"]["commercial"];
+		}
+
+		$('#result_DX_3to5Days').text(`£${dx35}`);
+	} else {
+		$('#result_DX_3to5Days').text("N/A");
+		console.log('DX3-5 does NOT contain: ', postcode);
+	}
+
+	//check if DX2-3 contains this postcode
+	if (dxZones['DX2-3'].includes(postcode)) {
+		console.log('DX2-3 contains: ', postcode);
+		let dx23 = dxPrices["DX2-3"]["Zone"] + dxSupplements["DX2-3"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dx23 += dxPrices["DX2-3"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dx23 += dxPrices["DX2-3"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dx23 += dxPrices["DX2-3"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dx23 += dxPrices["DX2-3"]["residential"];
+		}
+
+		if (address == 'commercial') {
+			dx23 += dxPrices["DX2-3"]["commercial"];
+		}
+		$('#result_DX_2to3Days').text(`£${dx23}`);
+	} else {
+		$('#result_DX_2to3Days').text("N/A");
+		console.log('DX2-3 does NOT contain: ', postcode);
+	}
+
+	//check if DXND contains this postcode
+	if (dxZones['DXND'].includes(postcode)) {
+		console.log('DXND contains: ', postcode);
+		let dxND = dxPrices["DXND"]["Zone"] + dxSupplements["DXND"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			dxND += dxPrices["DXND"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			dxND += dxPrices["DXND"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			dxND += dxPrices["DXND"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			dxND += dxPrices["DXND"]["residential"];
+		}
+
+		if (address == 'commercial') {
+			dxND += dxPrices["DXND"]["commercial"];
+		}
+		$('#result_DX_next_day').text(`£${dxND}`);
+	} else {
+		$('#result_DX_next_day').text("N/A");
+		console.log('DXND does NOT contain: ', postcode);
+	}
+
+	//check if DXAMND contains this postcode
+	if (dxZones['DXAMND'].includes(postcode)) {
+		console.log('DXAMND contains: ', postcode);
+		let DxAMND = dxPrices["DXAMND"]["Zone"] + dxSupplements["DXAMND"]["value"];
+
+		// Pipe Length
+		if (pipeLen == "less1.25") {
+			DxAMND += dxPrices["DXAMND"]["less1.25m"];
+		} else if (pipeLen == "2.5m") {
+			DxAMND += dxPrices["DXAMND"]["2.5m"];			
+		} else if (pipeLen == "6m") {
+			DxAMND += dxPrices["DXAMND"]["6m"];			
+		}
+
+		// Commercial/Residential
+		if (address == 'residential') {
+			DxAMND += dxPrices["DXAMND"]["residential"];
+		}
+
+		if (address == 'commercial') {
+			DxAMND += dxPrices["DXAMND"]["commercial"];
+		}
+		$('#result_DX_next_day_am').text(`£${DxAMND}`);
+	} else {
+		$('#result_DX_next_day_am').text("N/A");
+		console.log('DXAMND does NOT contain: ', postcode);
+	}
+}
+
+function mainCalc() {
+	calcDHL();
+	calcDX();
 
 
-// // check if postcode is exact match
-// let exactZoneMatch = false;
-// let tuffnellAreaName, dhlZoneName;
-// function checkPostZone() {
-// 	$.each(tuffnellZones, function(tuffZoneName, trimedZones){
-// 		if($.inArray(postcode, trimedZones) !== -1) {
-// 			// console.log(trimedZones);
-// 			exactZoneMatch = true;
-// 			tuffnellAreaName = tuffZoneName;
-// 			//find DHL Zone
-// 			$.each(dhlZones, function(dhlZoneNameIndex, trimedDHLZones){
-// 				if($.inArray(postcode, trimedDHLZones) !== -1) {
-// 					// console.log(trimedDHLZones);
-// 					dhlZoneName = dhlZoneNameIndex;
-// 					return false;
-// 				}else{
-// 					dhlZoneName = false;
-// 				}
-// 			});
-// 			// console.log(tuffnellAreaName, dhlZoneName);
-// 			return false;
-// 		}else{
-// 			// console.log('no');
-// 			exactZoneMatch = false;
-// 		}
-// 	})
-// 	mainCalc();
-// }
+	// // console.log('Starting calculations');
+	// if(exactZoneMatch){
+	// 	$( "#post_error_info" ).hide();
+	// 	if (tuffnellAreaName == "NI"){
+	// 		$('.tuffResults, #result_DHL_nextDay, #result_DHL_2to3Days, #result_DHL_am, #result_DHL_Saturday').text("Please contact us for orders to Northern Ireland");
+	// 	}else{
+	// 		calcDHL();
+	// 		calcDX();
+	// 	}
+	// 	$( "#carr_outputs_wrap" ).show();
+	// }else{
+	// 	// console.log('postode input error');
+	// 	//Red info that postcode is not a valid input
+	// 	$( "#post_error_info" ).show();
+	// 	$( "#carr_outputs_wrap" ).hide();
+	// }
+}
+
 
 //get user inputs
 let postcode, pipeLen, address;
@@ -169,8 +293,8 @@ function getInputs() {
 
 	pipeLen = $('#carr_input_pipe').val();
 	address = $('#carr_input_address').val();
-	// checkPostZone();
-	calcDHL();
+	
+	mainCalc();
 }
 
 // let calcButtonClicked = false;
