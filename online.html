@@ -2,7 +2,6 @@
 		<div id="carr_inputs_wrap">
 			<form>
 				<div id="three_inputs_wrap">
-
 					<div id="postcode_wrap">
 						<label for="carr_input_postcode"> Your Postcode: </label>
 						<input type="text" id="carr_input_postcode" value="">
@@ -12,9 +11,9 @@
 					<div id="pipe_wrap">
 						<label for="carr_input_pipe"> Your Pipe: </label>
 						<select id="carr_input_pipe">
-							<option value="less1.25"> <1.25m (or fittings/valves only) </option>
-							<option value="1.25to5"> 1.25m - 5m </option>
-							<option value="6m"> 6m </option>
+							<option value="less1.25"> <=1.25m (or fittings/valves only) </option>
+							<option value="2.5m"> 2.5m </option>
+							<option value="6m"> 3m - 6m </option>
 						</select>
 					</div>
 
@@ -37,65 +36,57 @@
 
 				<div id="carr_table_headline" class="carrTableRows">
 					<div> <p> Shipping Method </p> </div>
-					<div> <p> Tuffnells Options </p> </div>
 					<div> <p> DHL Options </p> </div>
+					<div> <p> DX Options </p> </div>
 				</div>
 
 				<div class="carrTableRows">
-					<div> <p> Next working day </p> </div>
-					<div> <p class="tuffResults" id="result_tuff_nextDay"> £<span>00.00</span> </p> </div>
+					<div> <p> 3-5 Working Days </p> </div>
 					<div> 
-						<p id="result_DHL_nextDay"> £<span>00.00</span> </p> 
-						<p class="dhlCutTo125"> Pipe must be cut to <1.25m </p>
+						<p id="result_DHL_3to5Days"> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to <=1.25m </p>
 					</div>
+					<div> <p class="dxResults" id="result_DX_3to5Days"> </p> </div>
 				</div>
 
 				<div class="carrTableRows">
-					<div> <p> 2-3 working day </p> </div>
-					<div> <p class="tuffResults" id="result_tuff_2to3Days"> £<span>00.00</span> </p> </div>
+					<div> <p> 2-3 Working Days </p> </div>
 					<div> 
-						<p id="result_DHL_2to3Days"> £<span>00.00</span> </p> 
-						<p class="dhlCutTo125"> Pipe must be cut to <1.25m </p>
+						<p id="result_DHL_2to3Days"> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to <=1.25m </p>
 					</div>
+					<div> <p class="dxResults" id="result_DX_2to3Days"> </p> </div>
 				</div>
 
 				<div class="carrTableRows">
-					<div> <p> AM </p> </div>
-					<div> <p class="tuffResults" id="result_tuff_am"> £<span>00.00</span> </p> </div>
+					<div> <p> Next Working Day </p> </div>
 					<div> 
-						<p id="result_DHL_am"> £<span>00.00</span> </p> 
-						<p class="dhlCutTo125"> Pipe must be cut to <1.25m </p>
+						<p id="result_DHL_next_day"> </p> 
+						<p class="dhlCutTo125"> Pipe must be cut to <=1.25m </p>
 					</div>
+					<div> <p class="dxResults" id="result_DX_next_day"> </p> </div>
 				</div>
 
-				<!-- <div class="carrTableRows">
-					<div> <p> Pre 10:30am </p> </div>
-					<div> <p class="tuffResults" id="result_tuff_pre1030"> £<span>00.00</span> </p> </div>
-					<div> 
-						<p id="result_DHL_pre1030"> £<span>00.00</span> </p> 
-						<p class="dhlCutTo125"> Pipe must be cut to <1.25m </p>
-					</div>
-				</div> -->
-
 				<div class="carrTableRows">
-					<div> <p> Saturday </p> </div>
-					<div> <p class="tuffResults" id="result_tuff_Saturday"> £<span>00.00</span> </p> </div>
+					<div> <p> A.M. Next Working Day </p> </div>
 					<div> 
-						<p id="result_DHL_Saturday"> £<span>00.00</span> </p> 
+						<p id="result_DHL_next_day_am"> </p> 
 						<p class="dhlCutTo125"> Pipe must be cut to <1.25m </p>
 					</div>
+					<div> <p class="dxResults" id="result_DX_next_day_am"> </p> </div>
 				</div>
 			</div>
 		</div>
+		<p id="postcode_error_text"> <i class="fas fa-exclamation-circle"></i> Postcode not recognised. Please make sure postcode is correct; otherwise, try your address at the checkout for available shipping methods. Please contact us if issue persists.</p>
 	</div> <!-- carr_wrap -->
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/dhlPrices.js"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/dhlZones.js"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/dhlSupplements.js"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/tuffnellPrices.js"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/tuffnellZones.js"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/tuffnellSupplements.js"></script>
-<script src="https://www.plasticpipeshop.co.uk/assets/templates/default-html5/js/js-v5.js"></script>
+<script src="js/dhlPrices.js"></script>
+<script src="js/dhlZones.js"></script>
+<script src="js/dhlSupplements.js"></script>
+<script src="js/dxPrices.js"></script>
+<script src="js/dxZones.js"></script>
+<script src="js/dxSupplements.js"></script>
+<script src="js/js-v6.js"></script>

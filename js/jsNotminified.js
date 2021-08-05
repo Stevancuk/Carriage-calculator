@@ -21,7 +21,7 @@ function calcDHL() {
 
 	//check if DHL3-5 contains this postcode
 	if (dhlZones['DHL3-5'].includes(postcode)) {
-		console.log('DHL3-5 contains: ', postcode);
+		// console.log('DHL3-5 contains: ', postcode);
 		atLeastOneMatchFound = true;
 		let dhl35 = dhlPrices["DHL3-5"]["Zone"] + dhlSupplements["DHL3-5"]["value"];
 
@@ -46,13 +46,13 @@ function calcDHL() {
 	} else {
 		$('#result_DHL_3to5Days').text("N/A");
 		$('#result_DHL_3to5Days').siblings('.dhlCutTo125').hide();
-		console.log('DHL3-5 does NOT contain: ', postcode);
+		// console.log('DHL3-5 does NOT contain: ', postcode);
 	}
 
 	//check if DHL2-3 contains this postcode
 	if (dhlZones['DHL2-3'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DHL2-3 contains: ', postcode);
+		// console.log('DHL2-3 contains: ', postcode);
 		let dhl23 = dhlPrices["DHL2-3"]["Zone"] + dhlSupplements["DHL2-3"]["value"];
 
 		// Pipe Length
@@ -76,13 +76,13 @@ function calcDHL() {
 	} else {
 		$('#result_DHL_2to3Days').text("N/A");
 		$('#result_DHL_2to3Days').siblings('.dhlCutTo125').hide();
-		console.log('DHL3-5 does NOT contain: ', postcode);
+		// console.log('DHL3-5 does NOT contain: ', postcode);
 	}
 
 	//check if DHLND contains this postcode
 	if (dhlZones['DHLND'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DHLND contains: ', postcode);
+		// console.log('DHLND contains: ', postcode);
 		let dhlND = dhlPrices["DHLND"]["Zone"] + dhlSupplements["DHLND"]["value"];
 
 		// Pipe Length
@@ -106,13 +106,13 @@ function calcDHL() {
 	} else {
 		$('#result_DHL_next_day').text("N/A");
 		$('#result_DHL_next_day').siblings('.dhlCutTo125').hide();
-		console.log('DHL3-5 does NOT contain: ', postcode);
+		// console.log('DHL3-5 does NOT contain: ', postcode);
 	}
 
 	//check if DHLAMND contains this postcode
 	if (dhlZones['DHLAMND'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DHLAMND contains: ', postcode);
+		// console.log('DHLAMND contains: ', postcode);
 		let dhlAMND = dhlPrices["DHLAMND"]["Zone"] + dhlSupplements["DHLAMND"]["value"];
 
 		// Pipe Length
@@ -136,7 +136,7 @@ function calcDHL() {
 	} else {
 		$('#result_DHL_next_day_am').text("N/A");
 		$('#result_DHL_next_day_am').siblings('.dhlCutTo125').hide();
-		console.log('DHL3-5 does NOT contain: ', postcode);
+		// console.log('DHL3-5 does NOT contain: ', postcode);
 	}
 }
 
@@ -151,7 +151,7 @@ function calcDX() {
 	//check if DX3-5 contains this postcode
 	if (dxZones['DX3-5'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DX3-5 contains: ', postcode);
+		// console.log('DX3-5 contains: ', postcode);
 		let dx35 = dxPrices["DX3-5"]["Zone"] + dxSupplements["DX3-5"]["value"];
 
 		// Pipe Length
@@ -174,13 +174,13 @@ function calcDX() {
 		$('#result_DX_3to5Days').text(`£${(dx35).toLocaleString()}`);
 	} else {
 		$('#result_DX_3to5Days').text("N/A");
-		console.log('DX3-5 does NOT contain: ', postcode);
+		// console.log('DX3-5 does NOT contain: ', postcode);
 	}
 
 	//check if DX2-3 contains this postcode
 	if (dxZones['DX2-3'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DX2-3 contains: ', postcode);
+		// console.log('DX2-3 contains: ', postcode);
 		let dx23 = dxPrices["DX2-3"]["Zone"] + dxSupplements["DX2-3"]["value"];
 
 		// Pipe Length
@@ -203,13 +203,13 @@ function calcDX() {
 		$('#result_DX_2to3Days').text(`£${(dx23).toLocaleString()}`);
 	} else {
 		$('#result_DX_2to3Days').text("N/A");
-		console.log('DX2-3 does NOT contain: ', postcode);
+		// console.log('DX2-3 does NOT contain: ', postcode);
 	}
 
 	//check if DXND contains this postcode
 	if (dxZones['DXND'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DXND contains: ', postcode);
+		// console.log('DXND contains: ', postcode);
 		let dxND = dxPrices["DXND"]["Zone"] + dxSupplements["DXND"]["value"];
 
 		// Pipe Length
@@ -232,13 +232,13 @@ function calcDX() {
 		$('#result_DX_next_day').text(`£${(dxND).toLocaleString()}`);
 	} else {
 		$('#result_DX_next_day').text("N/A");
-		console.log('DXND does NOT contain: ', postcode);
+		// console.log('DXND does NOT contain: ', postcode);
 	}
 
 	//check if DXAMND contains this postcode
 	if (dxZones['DXAMND'].includes(postcode)) {
 		atLeastOneMatchFound = true;
-		console.log('DXAMND contains: ', postcode);
+		// console.log('DXAMND contains: ', postcode);
 		let DxAMND = dxPrices["DXAMND"]["Zone"] + dxSupplements["DXAMND"]["value"];
 
 		// Pipe Length
@@ -261,7 +261,7 @@ function calcDX() {
 		$('#result_DX_next_day_am').text(`£${(DxAMND).toLocaleString()}`);
 	} else {
 		$('#result_DX_next_day_am').text("N/A");
-		console.log('DXAMND does NOT contain: ', postcode);
+		// console.log('DXAMND does NOT contain: ', postcode);
 	}
 }
 
@@ -276,7 +276,7 @@ function mainCalc() {
 		$( "#post_error_info, #postcode_error_text" ).hide();
 		$( "#carr_outputs_wrap" ).show();
 	}else{
-		console.log('postode input error');
+		// console.log('postode input error');
 		//Red info that postcode is not a valid input
 		$( "#post_error_info, #postcode_error_text" ).show();
 		$( "#carr_outputs_wrap" ).hide();
